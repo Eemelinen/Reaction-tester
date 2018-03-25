@@ -1,0 +1,118 @@
+
+
+ <!DOCTYPE html>
+
+ <html>
+     
+     <head>
+         
+        <Style>
+            
+            #introduction {
+                width: 50%;
+                margin: auto;
+                text-align: center;
+            }
+            
+            #shape {
+                width: 200px;
+                height: 200px;
+                background-color: red;
+                display: none;
+                position: relative;
+            }
+  
+         
+         </Style> 
+         
+         
+        <title>Javascript</title>
+         
+         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+         
+         
+     </head>
+
+     <body>
+         
+         <div id="introduction">
+
+             <h1>Test your reactions!</h1>
+
+             <button id="start-game-button"> Start the game!</button>
+
+             <h4 id="yourTime">Your time:</h4>
+
+             <div id="shape"></div>
+
+         </div>
+         
+         <script>
+             
+            var startTimer = new Date().getTime()
+             
+            function showDiv() {
+                
+                var top = Math.random() * 65;
+                var left = Math.random() * 65;
+                var colors = '#' + (Math.random().toString(16) + "000000").substring(2,8);
+                var size = (Math.random() * 200) + 20 ;
+                
+                if (Math.random() > 0.5) {
+                    
+                    document.getElementById("shape").style.borderRadius = "100px";
+                } else {
+                    
+                    document.getElementById("shape").style.borderRadius = "0px";
+                    
+                }
+                
+                document.getElementById("shape").style.top = top + "vh";
+                document.getElementById("shape").style.left = left + "vw";
+                document.getElementById("shape").style.backgroundColor = colors;
+                document.getElementById("shape").style.width = size + "px";
+                document.getElementById("shape").style.height = size + "px";
+
+                
+                
+                document.getElementById("shape").style.display = "block";
+                
+                startTimer = new Date().getTime();
+                
+            }
+             
+            function makeApperAfterDelay() {
+                
+                setTimeout(showDiv, Math.random() * 3000);
+                
+            }
+                          
+            document.getElementById("start-game-button").onclick = function() {
+                
+                setTimeout(showDiv, 1000);
+                                                                
+                document.getElementById("shape").onclick = function() {
+
+                    document.getElementById("shape").style.display = "none";
+                    
+                    var endTimer = new Date().getTime();
+
+                    var clickTime = (endTimer - startTimer) / 1000;
+                    
+                    document.getElementById("yourTime").innerHTML = "Your time: <br>" + clickTime + "s";
+                    
+                    makeApperAfterDelay();
+
+                }
+                
+            }
+            
+            
+            
+
+
+         </script>
+
+     </body>
+     
+ </html>
